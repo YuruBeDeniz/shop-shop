@@ -14,8 +14,8 @@ function App() {
         ? <Cart /> 
         : <ProductList />
       }
-    <Footer viewCart={viewCart} />
-  </>
+    <Footer />
+    </> 
   )
 }
 

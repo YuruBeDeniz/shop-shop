@@ -1,10 +1,13 @@
-type FooterProps = {
-    viewCart: boolean,
-}
+import useCart from "../hooks/useCart";
 
-const Footer = ({ viewCart }: FooterProps) => {
+const Footer = () => {
+  const { totalPrice, totalItems } = useCart();
+
   return (
-    <div>Footer</div>
+    <footer className="footer">
+      <p>Total Items: {totalItems}</p>
+      <p>Total Price: {totalPrice}</p>
+    </footer>
   )
 }
 

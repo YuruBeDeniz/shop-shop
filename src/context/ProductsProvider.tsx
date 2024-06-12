@@ -17,7 +17,7 @@ const initContextState: UseProductsContextType = {
     products: []
 };
 
-const ProductContext = createContext<UseProductsContextType>(initContextState);
+const ProductsContext = createContext<UseProductsContextType>(initContextState);
 
 type ChildrenType = {
     children?: ReactElement | ReactElement[]
@@ -42,8 +42,10 @@ export const ProductsProvider = ({ children }: ChildrenType) => {
     }, [])
 
     return (
-        <ProductContext.Provider value={{ products }}>
+        <ProductsContext.Provider value={{ products }}>
             {children}
-        </ProductContext.Provider>
+        </ProductsContext.Provider>
     )
 } 
+
+export default ProductsContext
