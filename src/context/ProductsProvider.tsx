@@ -28,18 +28,26 @@ export const ProductsProvider = ({ children }: ChildrenType) => {
 
     useEffect(() => {
         const fetchProducts = async (): Promise<ProductType[]> => {
-            const data = await fetch('http://localhost:3500/products')
-            .then(res => {
-                return res.json()
-            })
-            .catch(err => {
-                if (err instanceof Error) console.log(err.message)
-            })
-            return data
-        }
+            try {
+                const res = await fetch('http://localhost:3500/products');
+                if (!res.ok) {
+                    throw new Error(`HTTP error! status: ${res.status}`);
+                }
+                const data = await res.json();
+                return data;
+            } catch (err) {
+                if (err instanceof Error) {
+                    console.error("Fetch error:", err.message);
+                }
+                return [];
+            }
+        };
 
-        fetchProducts().then(products => setProducts(products))
-    }, [])
+        fetchProducts().then(products => {
+            setProducts(products);
+        });
+    }, []);
+
 
     return (
         <ProductsContext.Provider value={{ products }}>
